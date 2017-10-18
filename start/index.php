@@ -109,15 +109,6 @@ function generateVolumes() {
 
 
 
-// function get_total_area($width, $length) {
-// 	$total_areas = [];
-// 	for ($height=5.5; $height <= 6.5; $height += 0.1) { 
-// 		array_push($total_areas, ($height * $width * 2 + $height * $length * 2 + $width  * $length));
-// 	}
-// 	return $total_areas;
-
-// }
-
 function get_tiles($width, $length, $height, $tile_height, $tile_width) {
 	$tile = $tile_width * $tile_height;
 	$area = $height * $width * 2 + $height * $length * 2 + $width  * $length;
@@ -167,6 +158,19 @@ function get_rand_username() {
 
 }
 
+
+function three() {
+	for ($i=9; $i >=0; $i--) {
+		if ($i == 7 || $i == 3) {
+			for ($j=$i; $j >=0; $j--) { 
+				echo $j;
+			}
+			echo "\n";
+		} else {
+			echo $i . "\n";	
+		}
+	}
+}
 
 
 
