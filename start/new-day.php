@@ -178,11 +178,10 @@ function exam(string $username) {
 	}	
 
 	foreach ($users as $user) {
-		if ($user["mark"] <= $curr_lowest) {
+		if ($user["mark"] < $curr_lowest) {
 			echo $user["user"] . " " .  $user["mark"] . "\n";
 		} 
 	}
-
 }
 
 $fileName = array_shift($argv);
