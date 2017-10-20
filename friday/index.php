@@ -7,14 +7,49 @@ for ($i=1; !feof($fileW); $i++) {
 	$errors[] = $error;
 }
 fclose($fileW);
-
 array_pop($errors);
-?>
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "fake_app";
+
+// try {
+// 	$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+//     // set the PDO error mode to exception
+// 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+// 	foreach ($errors as $value) {
+// 		$sql = "INSERT INTO errors (time, file, error) VALUES ('" . $value[0] . "', '" . $value[1] . "', '" . $value[2] . "')";
+// 		// print($sql);
+// 		$conn->exec($sql);
+// 	}
+// }
+// catch(PDOException $e)
+// {
+// 	echo "Connection failed: " . $e->getMessage();
+// }
+
+
+try {
+	$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+    // set the PDO error mode to exception
+	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+	$q = $conn->prepare("SELECT * FROM errors");
+	$q->execute();
+
+	$result = $q->fetchALL(PDO::FETCH_ASSOC);
+}
+catch(PDOException $e)
+{
+	echo "Connection failed: " . $e->getMessage();
+}?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Error logs</title>
+	<title>Error logs</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -40,9 +75,9 @@ array_pop($errors);
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach ($errors as $id => $error) {
+						<?php foreach ($result as $error) {
 							echo "<tr>";
-							echo "<th>" . ++$id . "</th>";
+
 							foreach ($error as $value) {
 								echo "<td>". $value . "</td>";
 							}
