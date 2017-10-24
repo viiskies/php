@@ -1,4 +1,20 @@
-$("#ajax_post").click(function() {
+$.getJSON("users.php", function(result){
+	$("#user_table_body").html('');
+	$.each(result['users'], function(i, field){
+		$("#user_table_body").append(
+			"<tr><td>" + 
+			field.id + "</td><td>" + 
+			field.inputName + "</td><td>" + 
+			field.inputLastName + "</td><td>" + 
+			field.inputPhone + "</td><td>" + 
+			field.inputEmail + "</td><td>" + 
+			field.inputPassword + "</td></tr>"
+		);
+	});
+});
+
+
+$("#ajax_post").click(function(){
 	$.post("users.php",
 	{
 		inputName: $("#inputName").val(),
@@ -14,7 +30,15 @@ $("#ajax_post").click(function() {
 		$.getJSON("users.php", function(result){
 			$("#user_table_body").html('');
 			$.each(result['users'], function(i, field){
-				$("#user_table_body").append("<tr><td>" + field.id + "</td><td>" + field.inputName + "</td><td>" + field.inputLastName + "</td><td>" + field.inputPhone + "</td><td>" + field.inputEmail + "</td><td>" + field.inputPassword + "</td></tr>");
+				$("#user_table_body").append(
+					"<tr><td>" + 
+					field.id + "</td><td>" + 
+					field.inputName + "</td><td>" + 
+					field.inputLastName + "</td><td>" + 
+					field.inputPhone + "</td><td>" + 
+					field.inputEmail + "</td><td>" + 
+					field.inputPassword + "</td></tr>"
+				);
 			});
 		});
 	});		
@@ -32,12 +56,4 @@ $("#filter").keyup(function(){
 			$("#user_table_body").append("<tr><td>" + field.id + "</td><td>" + field.inputName + "</td><td>" + field.inputLastName + "</td><td>" + field.inputPhone + "</td><td>" + field.inputEmail + "</td><td>" + field.inputPassword + "</td></tr>");
 		});
 	});
-
 })
-
-$.getJSON("users.php", function(result){
-	$("#user_table_body").html('');
-	$.each(result['users'], function(i, field){
-		$("#user_table_body").append("<tr><td>" + field.id + "</td><td>" + field.inputName + "</td><td>" + field.inputLastName + "</td><td>" + field.inputPhone + "</td><td>" + field.inputEmail + "</td><td>" + field.inputPassword + "</td></tr>");
-	});
-});

@@ -1,29 +1,3 @@
-<?php
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "students";
-
-try {
-	$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-    // set the PDO error mode to exception
-	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-	$q = $conn->prepare("SELECT * FROM users");
-	$q->execute();
-
-	$result = $q->fetchALL(PDO::FETCH_ASSOC);
-}
-catch(PDOException $e)
-{
-	echo "Connection failed: " . $e->getMessage();
-}
-
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,7 +37,9 @@ catch(PDOException $e)
 			</div>
 			<div class="col-6">
 				<h3 class="text-center">Register</h3>
+
 				<div id="alert"></div>
+				
 				<input id="filter" type="text" name="">
 
 				<div class="form-group">
