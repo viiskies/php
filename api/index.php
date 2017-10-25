@@ -148,9 +148,12 @@ if (isset($_SESSION['username']) && $_SESSION['level'] >= 2) {
 
 			<?php } if(isset($_FILES) && isset($_POST['file_submit'])) { 
 				// $target_dir = "uploads/";
-				print_r($_POST);
 				$target_file = basename($_FILES["fileToUpload"]["name"]);
-				move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file); 
+				if (pathinfo($target_file,PATHINFO_EXTENSION) == "csv") {
+					move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file); 
+				} else {
+					echo "File was not uploaded.";
+				}
 			} ?>
 
 				<input id="last10" type="button" class="btn btn-primary" value="Show last 2">
