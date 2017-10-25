@@ -21,17 +21,14 @@ if(isset($_POST['owner']) && $_POST['owner'] != "") {
 		$sql->bindParam(':model', $model);
 		$sql->bindParam(':make', $make);
 
-
 		$owner = htmlspecialchars($_POST['owner']);
 		$license = $_POST['license'];
 		$model = $_POST["model"];
 		$make = $_POST["make"];
 
-
 		$sql->execute();
 		$conn = null;
 		$response['message'] = ['type' => 'success','body' => 'User was added'];
-
 
 	} catch(PDOException $e) {
 		$response['message'] = ['type' => 'danger','body' => $e->getMessage()];

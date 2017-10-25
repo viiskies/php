@@ -1,3 +1,15 @@
+<?php 
+session_start();
+if (isset($_SESSION['username']) && $_SESSION['level'] >= 1) {
+	$admin = true;
+} elseif(isset($_SESSION['username']) && $_SESSION['level'] == 0) {
+	$admin = false;
+
+} else {
+	// user is a guest
+	header('Location: login.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,10 +50,13 @@
 				</table>
 			</div>
 			<div class="col-4">
+
+			<a href="logout.php">Logout</a>
+			<?php if($admin) { ?>
 				<h3 class="text-center">Register</h3>
 
-				<div id="alert"></div>
-
+				<div id="alert"></div><?php
+}?>
 				<div class="form-group">
 					<label for="search">Search</label>
 					<input type="text" class="form-control" name="search" id="search" placeholder="Search owner">
@@ -49,21 +64,8 @@
 				
 				<label for="filter">Make search</label>
 				<select data-placeholder="Make" class="custom-select form-control"  id="filter">
-					<option value=""></option>
-					<option value="ACURA">ACURA</option>
-					<option value="ASTON MARTIN">ASTON MARTIN</option>
-					<option value="AUDI">AUDI</option>
-					<option value="BENTLEY">BENTLEY</option>
-					<option value="BMW">BMW</option>
-					<option value="BUICK">BUICK</option>
-					<option value="CADILLAC">CADILLAC</option>
-					<option value="CHEVROLET">CHEVROLET</option>
-					<option value="CHRYSLER">CHRYSLER</option>
-					<option value="DODGE">DODGE</option>
-					<option value="FERRARI">FERRARI</option>
-					<option value="FORD">FORD</option>
 				</select>
-
+<?php if($admin) { ?>
 				<div class="form-group pt-5">
 					<label for="owner">Owner</label>
 					<input type="text" class="form-control" name="owner" id="owner" placeholder="Enter owner's name">
@@ -128,6 +130,8 @@
 				</div>
 
 				<input id="ajax_post" type="button" class="btn btn-primary" value="Post">
+				 <?php }?>
+
 				<input id="last10" type="button" class="btn btn-primary" value="Show last 2">
 
 			</div>
