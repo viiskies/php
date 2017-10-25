@@ -1,9 +1,14 @@
 <?php 
 session_start();
-if (isset($_SESSION['username']) && $_SESSION['level'] >= 1) {
+if (isset($_SESSION['username']) && $_SESSION['level'] >= 2) {
+	$superuser = true;
 	$admin = true;
+} elseif(isset($_SESSION['username']) && $_SESSION['level'] == 1) {
+	$admin = true;
+	$superuser = false;
 } elseif(isset($_SESSION['username']) && $_SESSION['level'] == 0) {
 	$admin = false;
+	$superuser = false;
 
 } else {
 	// user is a guest
