@@ -56,86 +56,102 @@ if (isset($_SESSION['username']) && $_SESSION['level'] >= 2) {
 			</div>
 			<div class="col-4">
 
-			<a href="logout.php">Logout</a>
-			<?php if($admin) { ?>
+				<a href="logout.php">Logout</a>
+				<?php if($admin) { ?>
 				<h3 class="text-center">Register</h3>
 
 				<div id="alert"></div><?php
-}?>
-				<div class="form-group">
-					<label for="search">Search</label>
-					<input type="text" class="form-control" name="search" id="search" placeholder="Search owner">
-				</div>
-				
-				<label for="filter">Make search</label>
-				<select data-placeholder="Make" class="custom-select form-control"  id="filter">
-				</select>
-<?php if($admin) { ?>
-				<div class="form-group pt-5">
-					<label for="owner">Owner</label>
-					<input type="text" class="form-control" name="owner" id="owner" placeholder="Enter owner's name">
-				</div>
-				<div class="form-group">
-					<label for="license">License #</label>
-					<input type="text" class="form-control" name="license" id="license" placeholder="Enter license">
-				</div>
-				<div class="form-group">
-					<label for="model">Model</label>
-					<input type="text" class="form-control" name="model" id="model" placeholder="Enter car model">
-				</div>		
-				<div class="form-group">
-					<label for="model">Make</label>
-					<select data-placeholder="Make" class="custom-select form-control"  id="make">
-						<option value=""></option>
-						<option value="ACURA">ACURA</option>
-						<option value="ASTON MARTIN">ASTON MARTIN</option>
-						<option value="AUDI">AUDI</option>
-						<option value="BENTLEY">BENTLEY</option>
-						<option value="BMW">BMW</option>
-						<option value="BUICK">BUICK</option>
-						<option value="CADILLAC">CADILLAC</option>
-						<option value="CHEVROLET">CHEVROLET</option>
-						<option value="CHRYSLER">CHRYSLER</option>
-						<option value="DODGE">DODGE</option>
-						<option value="FERRARI">FERRARI</option>
-						<option value="FORD">FORD</option>
-						<option value="GMC">GMC</option>
-						<option value="HONDA">HONDA</option>
-						<option value="HUMMER">HUMMER</option>
-						<option value="HYUNDAI">HYUNDAI</option>
-						<option value="INFINITI">INFINITI</option>
-						<option value="ISUZU">ISUZU</option>
-						<option value="JAGUAR">JAGUAR</option>
-						<option value="JEEP">JEEP</option>
-						<option value="KIA">KIA</option>
-						<option value="LAMBORGHINI">LAMBORGHINI</option>
-						<option value="LAND ROVER">LAND ROVER</option>
-						<option value="LEXUS">LEXUS</option>
-						<option value="LINCOLN">LINCOLN</option>
-						<option value="LOTUS">LOTUS</option>
-						<option value="MASERATI">MASERATI</option>
-						<option value="MAYBACH">MAYBACH</option>
-						<option value="MAZDA">MAZDA</option>
-						<option value="MERCEDES-BENZ">MERCEDES-BENZ</option>
-						<option value="MERCURY">MERCURY</option>
-						<option value="MINI">MINI</option>
-						<option value="MITSUBISHI">MITSUBISHI</option>
-						<option value="NISSAN">NISSAN</option>
-						<option value="PONTIAC">PONTIAC</option>
-						<option value="PORSCHE">PORSCHE</option>
-						<option value="ROLLS-ROYCE">ROLLS-ROYCE</option>
-						<option value="SAAB">SAAB</option>
-						<option value="SATURN">SATURN</option>
-						<option value="SUBARU">SUBARU</option>
-						<option value="SUZUKI">SUZUKI</option>
-						<option value="TOYOTA">TOYOTA</option>
-						<option value="VOLKSWAGEN">VOLKSWAGEN</option>
-						<option value="VOLVO">VOLVO</option>
-					</select>
-				</div>
+			}?>
+			<div class="form-group">
+				<label for="search">Search</label>
+				<input type="text" class="form-control" name="search" id="search" placeholder="Search owner">
+			</div>
 
-				<input id="ajax_post" type="button" class="btn btn-primary" value="Post">
-				 <?php }?>
+			<label for="filter">Make search</label>
+			<select data-placeholder="Make" class="custom-select form-control"  id="filter">
+			</select>
+			<?php if($admin) { ?>
+			<div class="form-group pt-5">
+				<label for="owner">Owner</label>
+				<input type="text" class="form-control" name="owner" id="owner" placeholder="Enter owner's name">
+			</div>
+			<div class="form-group">
+				<label for="license">License #</label>
+				<input type="text" class="form-control" name="license" id="license" placeholder="Enter license">
+			</div>
+			<div class="form-group">
+				<label for="model">Model</label>
+				<input type="text" class="form-control" name="model" id="model" placeholder="Enter car model">
+			</div>		
+			<div class="form-group">
+				<label for="model">Make</label>
+				<select data-placeholder="Make" class="custom-select form-control"  id="make">
+					<option value=""></option>
+					<option value="ACURA">ACURA</option>
+					<option value="ASTON MARTIN">ASTON MARTIN</option>
+					<option value="AUDI">AUDI</option>
+					<option value="BENTLEY">BENTLEY</option>
+					<option value="BMW">BMW</option>
+					<option value="BUICK">BUICK</option>
+					<option value="CADILLAC">CADILLAC</option>
+					<option value="CHEVROLET">CHEVROLET</option>
+					<option value="CHRYSLER">CHRYSLER</option>
+					<option value="DODGE">DODGE</option>
+					<option value="FERRARI">FERRARI</option>
+					<option value="FORD">FORD</option>
+					<option value="GMC">GMC</option>
+					<option value="HONDA">HONDA</option>
+					<option value="HUMMER">HUMMER</option>
+					<option value="HYUNDAI">HYUNDAI</option>
+					<option value="INFINITI">INFINITI</option>
+					<option value="ISUZU">ISUZU</option>
+					<option value="JAGUAR">JAGUAR</option>
+					<option value="JEEP">JEEP</option>
+					<option value="KIA">KIA</option>
+					<option value="LAMBORGHINI">LAMBORGHINI</option>
+					<option value="LAND ROVER">LAND ROVER</option>
+					<option value="LEXUS">LEXUS</option>
+					<option value="LINCOLN">LINCOLN</option>
+					<option value="LOTUS">LOTUS</option>
+					<option value="MASERATI">MASERATI</option>
+					<option value="MAYBACH">MAYBACH</option>
+					<option value="MAZDA">MAZDA</option>
+					<option value="MERCEDES-BENZ">MERCEDES-BENZ</option>
+					<option value="MERCURY">MERCURY</option>
+					<option value="MINI">MINI</option>
+					<option value="MITSUBISHI">MITSUBISHI</option>
+					<option value="NISSAN">NISSAN</option>
+					<option value="PONTIAC">PONTIAC</option>
+					<option value="PORSCHE">PORSCHE</option>
+					<option value="ROLLS-ROYCE">ROLLS-ROYCE</option>
+					<option value="SAAB">SAAB</option>
+					<option value="SATURN">SATURN</option>
+					<option value="SUBARU">SUBARU</option>
+					<option value="SUZUKI">SUZUKI</option>
+					<option value="TOYOTA">TOYOTA</option>
+					<option value="VOLKSWAGEN">VOLKSWAGEN</option>
+					<option value="VOLVO">VOLVO</option>
+				</select>
+			</div>
+
+			<input id="ajax_post" type="button" class="btn btn-primary" value="Post">
+			<?php }?>
+
+			<?php if($superuser) { ?>
+			<div class="form-group pt-5">
+				<form method="post" enctype="multipart/form-data">
+					Select file to upload:
+					<input type="file" name="fileToUpload" id="fileToUpload">
+					<input type="submit" value="Upload Image" name="file_submit">
+				</form>
+			</div>
+
+			<?php } if(isset($_FILES) && isset($_POST['file_submit'])) { 
+				// $target_dir = "uploads/";
+				print_r($_POST);
+				$target_file = basename($_FILES["fileToUpload"]["name"]);
+				move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file); 
+			} ?>
 
 				<input id="last10" type="button" class="btn btn-primary" value="Show last 2">
 
