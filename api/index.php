@@ -39,7 +39,7 @@ if (isset($_SESSION['username']) && $_SESSION['level'] >= 2) {
 		<div class="row">
 			<div class="col">
 				<h3 class="text-center">List</h3>
-				<table class="table table-striped">
+				<table class="table table-responsive-md table-striped">
 					<thead class="thead-inverse">
 						<tr>
 							<th>#</th>
