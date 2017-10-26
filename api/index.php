@@ -13,6 +13,8 @@ if (isset($_SESSION['username']) && $_SESSION['level'] >= 2) {
 	// user is a guest
 	header('Location: login.php');
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,6 +48,7 @@ if (isset($_SESSION['username']) && $_SESSION['level'] >= 2) {
 							<th>Model</th>
 							<th>Make</th>
 							<th>Date</th>
+							<th>DELETE</th>
 						</tr>
 					</thead>
 					<tbody id="cars_table_body">
@@ -70,70 +73,72 @@ if (isset($_SESSION['username']) && $_SESSION['level'] >= 2) {
 			<select data-placeholder="Make" class="custom-select form-control"  id="filter">
 			</select>
 			<?php if($admin) { ?>
-			<div class="form-group pt-5">
-				<label for="owner">Owner</label>
-				<input type="text" class="form-control" name="owner" id="owner" placeholder="Enter owner's name">
-			</div>
-			<div class="form-group">
-				<label for="license">License #</label>
-				<input type="text" class="form-control" name="license" id="license" placeholder="Enter license">
-			</div>
-			<div class="form-group">
-				<label for="model">Model</label>
-				<input type="text" class="form-control" name="model" id="model" placeholder="Enter car model">
-			</div>		
-			<div class="form-group">
-				<label for="model">Make</label>
-				<select data-placeholder="Make" class="custom-select form-control"  id="make">
-					<option value=""></option>
-					<option value="ACURA">ACURA</option>
-					<option value="ASTON MARTIN">ASTON MARTIN</option>
-					<option value="AUDI">AUDI</option>
-					<option value="BENTLEY">BENTLEY</option>
-					<option value="BMW">BMW</option>
-					<option value="BUICK">BUICK</option>
-					<option value="CADILLAC">CADILLAC</option>
-					<option value="CHEVROLET">CHEVROLET</option>
-					<option value="CHRYSLER">CHRYSLER</option>
-					<option value="DODGE">DODGE</option>
-					<option value="FERRARI">FERRARI</option>
-					<option value="FORD">FORD</option>
-					<option value="GMC">GMC</option>
-					<option value="HONDA">HONDA</option>
-					<option value="HUMMER">HUMMER</option>
-					<option value="HYUNDAI">HYUNDAI</option>
-					<option value="INFINITI">INFINITI</option>
-					<option value="ISUZU">ISUZU</option>
-					<option value="JAGUAR">JAGUAR</option>
-					<option value="JEEP">JEEP</option>
-					<option value="KIA">KIA</option>
-					<option value="LAMBORGHINI">LAMBORGHINI</option>
-					<option value="LAND ROVER">LAND ROVER</option>
-					<option value="LEXUS">LEXUS</option>
-					<option value="LINCOLN">LINCOLN</option>
-					<option value="LOTUS">LOTUS</option>
-					<option value="MASERATI">MASERATI</option>
-					<option value="MAYBACH">MAYBACH</option>
-					<option value="MAZDA">MAZDA</option>
-					<option value="MERCEDES-BENZ">MERCEDES-BENZ</option>
-					<option value="MERCURY">MERCURY</option>
-					<option value="MINI">MINI</option>
-					<option value="MITSUBISHI">MITSUBISHI</option>
-					<option value="NISSAN">NISSAN</option>
-					<option value="PONTIAC">PONTIAC</option>
-					<option value="PORSCHE">PORSCHE</option>
-					<option value="ROLLS-ROYCE">ROLLS-ROYCE</option>
-					<option value="SAAB">SAAB</option>
-					<option value="SATURN">SATURN</option>
-					<option value="SUBARU">SUBARU</option>
-					<option value="SUZUKI">SUZUKI</option>
-					<option value="TOYOTA">TOYOTA</option>
-					<option value="VOLKSWAGEN">VOLKSWAGEN</option>
-					<option value="VOLVO">VOLVO</option>
-				</select>
-			</div>
+			<div class="">
+				<div class="form-group pt-5">
+					<label for="owner">Owner</label>
+					<input type="text" class="form-control" name="owner" id="owner" placeholder="Enter owner's name">
+				</div>
+				<div class="form-group">
+					<label for="license">License #</label>
+					<input type="text" class="form-control" name="license" id="license" placeholder="Enter license">
+				</div>
+				<div class="form-group">
+					<label for="model">Model</label>
+					<input type="text" class="form-control" name="model" id="model" placeholder="Enter car model">
+				</div>		
+				<div class="form-group">
+					<label for="model">Make</label>
+					<select data-placeholder="Make" class="custom-select form-control"  id="make">
+						<option value=""></option>
+						<option value="ACURA">ACURA</option>
+						<option value="ASTON MARTIN">ASTON MARTIN</option>
+						<option value="AUDI">AUDI</option>
+						<option value="BENTLEY">BENTLEY</option>
+						<option value="BMW">BMW</option>
+						<option value="BUICK">BUICK</option>
+						<option value="CADILLAC">CADILLAC</option>
+						<option value="CHEVROLET">CHEVROLET</option>
+						<option value="CHRYSLER">CHRYSLER</option>
+						<option value="DODGE">DODGE</option>
+						<option value="FERRARI">FERRARI</option>
+						<option value="FORD">FORD</option>
+						<option value="GMC">GMC</option>
+						<option value="HONDA">HONDA</option>
+						<option value="HUMMER">HUMMER</option>
+						<option value="HYUNDAI">HYUNDAI</option>
+						<option value="INFINITI">INFINITI</option>
+						<option value="ISUZU">ISUZU</option>
+						<option value="JAGUAR">JAGUAR</option>
+						<option value="JEEP">JEEP</option>
+						<option value="KIA">KIA</option>
+						<option value="LAMBORGHINI">LAMBORGHINI</option>
+						<option value="LAND ROVER">LAND ROVER</option>
+						<option value="LEXUS">LEXUS</option>
+						<option value="LINCOLN">LINCOLN</option>
+						<option value="LOTUS">LOTUS</option>
+						<option value="MASERATI">MASERATI</option>
+						<option value="MAYBACH">MAYBACH</option>
+						<option value="MAZDA">MAZDA</option>
+						<option value="MERCEDES-BENZ">MERCEDES-BENZ</option>
+						<option value="MERCURY">MERCURY</option>
+						<option value="MINI">MINI</option>
+						<option value="MITSUBISHI">MITSUBISHI</option>
+						<option value="NISSAN">NISSAN</option>
+						<option value="PONTIAC">PONTIAC</option>
+						<option value="PORSCHE">PORSCHE</option>
+						<option value="ROLLS-ROYCE">ROLLS-ROYCE</option>
+						<option value="SAAB">SAAB</option>
+						<option value="SATURN">SATURN</option>
+						<option value="SUBARU">SUBARU</option>
+						<option value="SUZUKI">SUZUKI</option>
+						<option value="TOYOTA">TOYOTA</option>
+						<option value="VOLKSWAGEN">VOLKSWAGEN</option>
+						<option value="VOLVO">VOLVO</option>
+					</select>
+				</div>
 
-			<input id="ajax_post" type="button" class="btn btn-primary" value="Post">
+				<input id="ajax_post" type="button" class="btn btn-primary" value="Post">
+			</div>
 			<?php }?>
 
 			<?php if($superuser) { ?>
@@ -148,8 +153,7 @@ if (isset($_SESSION['username']) && $_SESSION['level'] >= 2) {
 			<?php } 
 			if(isset($_GET['msg'])) {
 				echo '<div class="alert alert-' . $_GET['typ'] . '" role="alert">'. $_GET['msg'] .' </div>';
-			}
-			?>
+			} ?>
 
 			<input id="last10" type="button" class="btn btn-primary" value="Show last 2">
 

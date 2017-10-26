@@ -9,13 +9,17 @@ var myArr = {
 $.getJSON("cars.php", function(result){
 	$("cars_table_body").html('');
 	$.each(result['cars'], function(i, field){
-		$("#cars_table_body").append("<tr><td>" 
-			+ field.id + "</td><td>" 
-			+ field.owner + "</td><td>" 
-			+ field.license + "</td><td>" 
-			+ field.model + "</td><td>" 
-			+ field.make + "</td><td>" 
-			+ field.date + "</td></tr>");
+		$("#cars_table_body").append(
+			"<tr><td>" + 
+			field.id + "</td><td>" + 
+			field.owner + "</td><td>" + 
+			field.license + "</td><td>" + 
+			field.model + "</td><td>" + 
+			field.make + "</td><td>" + 
+			field.date + "</td><td>" +
+			'<a class="btn btn-danger" href="cars.php?id=' +  field.id  + '" role="button">Delete</a>' +  
+			"</td></tr>"
+			);
 	});
 });
 
@@ -51,7 +55,9 @@ $("#ajax_post").click(function(){
 					field.license + "</td><td>" + 
 					field.model + "</td><td>" + 
 					field.make + "</td><td>" + 
-					field.date + "</td></tr>"
+					field.date + "</td><td>" +
+					'<a class="btn btn-danger" href="cars.php?id=' +  field.id  + '" role="button">Delete</a>' +  
+					"</td></tr>"
 					);
 			});
 			$.getJSON("cars.php", function(result){
@@ -73,7 +79,17 @@ $("#filter").change(function(){
 		function(result){
 			$("#cars_table_body").html('');
 			$.each(result['cars'], function(i, field){
-				$("#cars_table_body").append("<tr><td>" + field.id + "</td><td>" + field.owner + "</td><td>" + field.license + "</td><td>" + field.model + "</td><td>" + field.make + "</td><td>" + field.date + "</td></tr>");
+				$("#cars_table_body").append(
+					"<tr><td>" + 
+					field.id + "</td><td>" + 
+					field.owner + "</td><td>" + 
+					field.license + "</td><td>" + 
+					field.model + "</td><td>" + 
+					field.make + "</td><td>" + 
+					field.date + "</td><td>" +
+					'<a class="btn btn-danger" href="cars.php?id=' +  field.id  + '" role="button">Delete</a>' +  
+					"</td></tr>"
+					);
 			});
 		});
 })
@@ -87,7 +103,17 @@ $("#last10").click(function(){
 			function(result){
 				$("#cars_table_body").html('');
 				$.each(result['cars'], function(i, field){
-					$("#cars_table_body").append("<tr><td>" + field.id + "</td><td>" + field.owner + "</td><td>" + field.license + "</td><td>" + field.model + "</td><td>" + field.make + "</td><td>" + field.date + "</td></tr>");
+					$("#cars_table_body").append(
+					"<tr><td>" + 
+					field.id + "</td><td>" + 
+					field.owner + "</td><td>" + 
+					field.license + "</td><td>" + 
+					field.model + "</td><td>" + 
+					field.make + "</td><td>" + 
+					field.date + "</td><td>" +
+					'<a class="btn btn-danger" href="cars.php?id=' +  field.id  + '" role="button">Delete</a>' +  
+					"</td></tr>"
+						);
 				});
 			});
 
@@ -98,7 +124,17 @@ $("#last10").click(function(){
 			function(result){
 				$("#cars_table_body").html('');
 				$.each(result['cars'], function(i, field){
-					$("#cars_table_body").append("<tr><td>" + field.id + "</td><td>" + field.owner + "</td><td>" + field.license + "</td><td>" + field.model + "</td><td>" + field.make + "</td><td>" + field.date + "</td></tr>");
+					$("#cars_table_body").append(
+					"<tr><td>" + 
+					field.id + "</td><td>" + 
+					field.owner + "</td><td>" + 
+					field.license + "</td><td>" + 
+					field.model + "</td><td>" + 
+					field.make + "</td><td>" + 
+					field.date + "</td><td>" +
+					'<a class="btn btn-danger" href="cars.php?id=' +  field.id  + '" role="button">Delete</a>' +  
+					"</td></tr>"
+						);
 				});
 			});
 
@@ -113,7 +149,17 @@ $("#search").keyup(function(){
 		function(result){
 			$("#cars_table_body").html('');
 			$.each(result['cars'], function(i, field){
-				$("#cars_table_body").append("<tr><td>" + field.id + "</td><td>" + field.owner + "</td><td>" + field.license + "</td><td>" + field.model + "</td><td>" + field.make + "</td><td>" + field.date + "</td></tr>");
+				$("#cars_table_body").append(
+					"<tr><td>" + 
+					field.id + "</td><td>" + 
+					field.owner + "</td><td>" + 
+					field.license + "</td><td>" + 
+					field.model + "</td><td>" + 
+					field.make + "</td><td>" + 
+					field.date + "</td><td>" +
+					'<a class="btn btn-danger" href="cars.php?id=' +  field.id  + '" role="button">Delete</a>' +  
+					"</td></tr>"
+					);
 			});
 		});
 })

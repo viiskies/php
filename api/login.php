@@ -1,65 +1,63 @@
-<pre>
-	<?php
-	$login_alert = false;
-	session_start();
+<?php
+$login_alert = false;
+session_start();
 
-	// after registration jump straight into page
-	if (isset($_SESSION['username'])) {
-		$_POST['username'] = $_SESSION['username'];
-		$_POST['password'] = $_SESSION['password'];
+// after registration jump straight into page
+if (isset($_SESSION['username'])) {
+	$_POST['username'] = $_SESSION['username'];
+	$_POST['password'] = $_SESSION['password'];
+}
+
+if (isset($_POST['username']) ) {
+
+	$servername = "localhost";
+	$usernam = "root";
+	$passwor = "";
+	$database = "regitra";
+
+	try {
+		$conn = new PDO("mysql:host=$servername;dbname=$database", $usernam, $passwor);
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "SELECT * FROM users";
+
+		$sql .= " WHERE username='" . $_POST['username'] . "'";
+		$statement = $conn->query($sql);
+		$response = $statement->fetch(PDO::FETCH_ASSOC);
+
+		$conn = null;
+
+	} catch(PDOException $e) { 
+		echo $e->getMessage(); 
 	}
+	$hash = $response['password'];
+	$password = $_POST['password'];
 
-	if (isset($_POST['username']) ) {
+	if ( password_verify($password, $hash) && $_POST['password'] != "") {
 
-		$servername = "localhost";
-		$usernam = "root";
-		$passwor = "";
-		$database = "regitra";
+		$_SESSION['username'] = $_POST['username'];
+		$_SESSION['level'] = $response['level'];
+		$_SESSION['last_login'] = date("Y-m-d H:m:s");
 
-		try {
-			$conn = new PDO("mysql:host=$servername;dbname=$database", $usernam, $passwor);
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "SELECT * FROM users";
+		// setcookie("sausainis_username", $response['username'], time() + (60*60*24), "/");
 
-			$sql .= " WHERE username='" . $_POST['username'] . "'";
-			$statement = $conn->query($sql);
-			$response = $statement->fetch(PDO::FETCH_ASSOC);
-
-			$conn = null;
-
-		} catch(PDOException $e) { 
-			echo $e->getMessage(); 
-		}
-		$hash = $response['password'];
-		$password = $_POST['password'];
-
-		if ( password_verify($password, $hash) && $_POST['password'] != "") {
-
-			$_SESSION['username'] = $_POST['username'];
-			$_SESSION['level'] = $response['level'];
-			$_SESSION['last_login'] = date("Y-m-d H:m:s");
-
-			// setcookie("sausainis_username", $response['username'], time() + (60*60*24), "/");
-
-		} else {
-			$login_alert = true;
-		}
-		
-
-	} elseif (isset($_POST['logout'])) {
-
-		session_destroy();
-		$_SESSION = null;
-		setcookie("sausainis_username", "", time() - 3600);
-	} 
-
-	if(isset($_SESSION['level']) && $_SESSION['level'] >= 0) {
-		header("Location: index.php");
 	} else {
-		// echo "You are guest";
+		$login_alert = true;
 	}
-	?>
-</pre>
+	
+
+} elseif (isset($_POST['logout'])) {
+
+	session_destroy();
+	$_SESSION = null;
+	setcookie("sausainis_username", "", time() - 3600);
+} 
+
+if(isset($_SESSION['level']) && $_SESSION['level'] >= 0) {
+	header("Location: index.php");
+} else {
+	// echo "You are guest";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,7 +68,7 @@
 
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-	
+
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="login.css">
 </head>
@@ -79,7 +77,7 @@
 	<div class="container">
 
 		<form class="form-signin" method="POST">
-		<?php if($login_alert){ ?>
+			<?php if($login_alert){ ?>
 			<div class="alert alert-danger my-5" role="alert">
 				Login Failed
 			</div>
@@ -94,11 +92,6 @@
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 			<a class="btn btn-lg btn-success btn-block" href="register.php">Register</a>
 		</form>
-<!-- 		<form method="POST" class="form-signin">
-			<button class="btn btn-lg btn-primary btn-block" name="logout" type="submit">OUT</button>
-		</form> -->
-
-
 	</div>
 
 </body>

@@ -1,11 +1,37 @@
 <?php 
-
+session_start();
 header("Content-type:application/json");
 
 $servername = "localhost";
 $username = "root";
 $password = "";
 $database = "regitra";
+
+if(isset($_GET['id']) && $_GET['id'] != "") {
+	if ($_SESSION['level'] > 1) {
+
+		try {
+			$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+			$sql = $conn->prepare("DELETE FROM cars WHERE id = :id");
+
+			$sql->bindParam(':id', $id);
+			$id = $_GET['id'];
+
+			$sql->execute();
+
+			$conn = null;
+			header("Location: index.php?msg=Row deleted&typ=warning");
+
+		} catch(PDOException $e) { 
+			echo $e->getMessage(); 
+		}
+	} else {
+		header("Location: index.php?msg=You are not allowed to do that&typ=warning");
+	}
+}
+
 
 if(isset($_POST['owner']) && $_POST['owner'] != "") {
 
