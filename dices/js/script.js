@@ -26,12 +26,12 @@ function rollDices() {
 			}
 		}
 	}
-	$("#dicegame ul").html('');
-	$.each(current_roll, function(i, field){
-		$("#dicegame ul").append(
-			"<li>" + field + "</li>"
-			);
-	});
+	// $("#dicegame ul").html('');
+	$('.dice').removeClass();
+	for (var i = 1; i <= current_roll.length ; i++) {
+		$('#dice'+ i).addClass('dice dice' + current_roll[i-1]);
+
+	}
 	return current_roll;
 }
 

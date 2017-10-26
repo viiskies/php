@@ -1,0 +1,27 @@
+.dice {
+  background: url(Dice.png);
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+}
+
+.dice1 {
+	background-position: -11px -11px;
+}
+
+.dice2 {
+	background-position: -235px -11px;
+}
+
+.dice3 {
+	background-position: -458px -11px;
+}
+.dice4 {
+	background-position: -12px -234px;
+}
+.dice5 {
+	background-position: -241px -234px;
+}
+.dice6 {
+	background-position: -462px -238px;
+}
