@@ -9,7 +9,6 @@ if (isset($_SESSION['username']) && $_SESSION['level'] >= 2) {
 } elseif(isset($_SESSION['username']) && $_SESSION['level'] == 0) {
 	$admin = false;
 	$superuser = false;
-
 } else {
 	// user is a guest
 	header('Location: login.php');
@@ -139,29 +138,25 @@ if (isset($_SESSION['username']) && $_SESSION['level'] >= 2) {
 
 			<?php if($superuser) { ?>
 			<div class="form-group pt-5">
-				<form method="post" enctype="multipart/form-data">
+				<form action="uploadcsv.php" method="post" enctype="multipart/form-data">
 					Select file to upload:
 					<input type="file" name="fileToUpload" id="fileToUpload">
-					<input type="submit" value="Upload Image" name="file_submit">
+					<input type="submit" value="Upload a CSV file" name="file_submit">
 				</form>
 			</div>
 
-			<?php } if(isset($_FILES) && isset($_POST['file_submit'])) { 
-				// $target_dir = "uploads/";
-				$target_file = basename($_FILES["fileToUpload"]["name"]);
-				if (pathinfo($target_file,PATHINFO_EXTENSION) == "csv") {
-					move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file); 
-				} else {
-					echo "File was not uploaded.";
-				}
-			} ?>
+			<?php } 
+			if(isset($_GET['msg'])) {
+				echo '<div class="alert alert-' . $_GET['typ'] . '" role="alert">'. $_GET['msg'] .' </div>';
+			}
+			?>
 
-				<input id="last10" type="button" class="btn btn-primary" value="Show last 2">
+			<input id="last10" type="button" class="btn btn-primary" value="Show last 2">
 
-			</div>
 		</div>
 	</div>
-	<!-- jQuery first, then Tether, then Bootstrap JS. -->
+</div>
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
 
 <!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script> -->

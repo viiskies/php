@@ -21,6 +21,7 @@ $.getJSON("cars.php", function(result){
 
 $.getJSON("cars.php", function(result){
 	$("#filter").html('');
+	$("#filter").append("<option value=''></option>");
 	$.each(result['makers'], 
 		function(i, field){
 			$("#filter").append("<option value= '" + field.make + "'>" + field.make + "</option>");
