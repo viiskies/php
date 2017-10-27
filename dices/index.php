@@ -35,10 +35,6 @@ if (isset($_SESSION['username'])) {
 		<div class="row">
 			<div class="col">
 				<div id="dicegame">
-
-					<ul>
-
-					</ul>
 					<h1>Winings:</h1>
 					<h2 id="winings"></h2>
 				</div>

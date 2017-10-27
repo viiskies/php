@@ -5,26 +5,31 @@ header("Content-type:application/json");
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "regitra";
+$database = "dices";
 
-if(isset($_POST['owner']) && $_POST['owner'] != "") {
+if(isset($_POST['winings']) && $_POST['winings'] != "") {
 
 	try {
 		$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     // set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		$sql = $conn->prepare("INSERT INTO cars (owner, license, model, make, date) VALUES (:owner, :license, :model, :make, NOW())");
+		$sql = $conn->prepare("INSERT INTO games (username, roll1, roll2, roll3, roll4, winings, date) VALUES (:username, :roll1, :roll2, :roll3, :roll4, :winings, NOW())");
 
-		$sql->bindParam(':owner', $owner);
-		$sql->bindParam(':license', $license);
-		$sql->bindParam(':model', $model);
-		$sql->bindParam(':make', $make);
+		$sql->bindParam(':username', $username);
+		$sql->bindParam(':roll1', $roll1);
+		$sql->bindParam(':roll2', $roll2);
+		$sql->bindParam(':roll3', $roll3);		
+		$sql->bindParam(':roll4', $roll4);
+		$sql->bindParam(':winings', $winings);
 
-		$owner = htmlspecialchars($_POST['owner']);
-		$license = $_POST['license'];
-		$model = $_POST["model"];
-		$make = $_POST["make"];
+		$username = $_SESSION['username'];
+		$roll1 = $_POST['roll1'];
+		$roll2 = $_POST['roll2'];
+		$roll3 = $_POST['roll3'];
+		$roll4 = $_POST['roll4'];
+		$winings = $_POST['winings'];
+
 
 		$sql->execute();
 		$conn = null;
@@ -34,7 +39,20 @@ if(isset($_POST['owner']) && $_POST['owner'] != "") {
 		$response['message'] = ['type' => 'danger','body' => $e->getMessage()];
 	}
 } else {
-	$response['message'] = ['type' => 'warning','body' => 'No user data to submit'];
+	try {
+		$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+    // set the PDO error mode to exception
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "SELECT * FROM games";
+
+		$statement = $conn->query($sql);
+		$response['games'] = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+		$conn = null;
+
+	} catch(PDOException $e) {
+		$response['message'] = ['type' => 'danger','body' =>  $e->getMessage()];
+	}
 }
 
 // try {

@@ -3,11 +3,12 @@ let roll = 0;
 let allRolls = [];
 let totalWinings = 0;
 // Get the button, and when the user clicks on it, execute myFunction
+$('.dice').removeClass();
 
 $("#winings").text(totalWinings);
 
-document.getElementById("new_game").onclick = function() {startGame()};
-document.getElementById("roll_dice").onclick = function() {rolla()};
+document.getElementById("new_game").onclick = function() { startGame()};
+document.getElementById("roll_dice").onclick = function() { rolla()};
 
 /* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
 function rollDices() {
@@ -17,12 +18,14 @@ function rollDices() {
 	for (var i = total_dices - 1; i >= 0; i--) {
 		current_roll.push(Math.ceil(Math.random()*6));
 	}
+
+	win:
 	for (var j = 0; j < current_roll.length-1; j++) {
 		for (var k = j+1; k < current_roll.length; k++) {
 			if (current_roll[j] == current_roll[k]){
 				totalWinings += 0.1 * current_roll[j];
 				$("#winings").text(Math.round(totalWinings * 10) / 10);
-				break;
+				break win;
 			}
 		}
 	}
@@ -37,7 +40,7 @@ function rollDices() {
 
 
 function startGame() {
-	$("#dicegame ul").html('');
+	$('.dice').removeClass();
 	totalWinings = 0;
 	$("#winings").text(Math.round(totalWinings * 10) / 10);
 	allRolls = [];
@@ -48,28 +51,41 @@ function startGame() {
 
 function rolla() {
 	roll++;
-	if (roll <= 4) {
+	if (roll < total_rolls) {
+
 		console.log("Roll number " + roll);
 		let newRoll = rollDices();
 		allRolls.push(newRoll);
 		console.log(allRolls);
-	} else {
-		// Math.round10(totalWinings, -1*/
+
+	} else if (roll == total_rolls) {
+
+		console.log("Roll number " + roll);
+		let newRoll = rollDices();
+		allRolls.push(newRoll);
+		console.log(allRolls);
 		console.log("You've won " + Math.round(totalWinings * 10) / 10);
+		totalWinings = Math.round(totalWinings * 10) / 10;
+		$.post("game.php",
+		{
+			roll1: allRolls[0].join(),
+			roll2: allRolls[1].join(),
+			roll3: allRolls[2].join(),
+			roll4: allRolls[3].join(),
+			winings: totalWinings
+		},
+		function(data, status) {
+			console.log(status);
+
+		});		
 		console.log("Game is over");
+
+	} else {
+		console.log("Game is really over");
+
 	}
 
 }
 
 
-$("#ajax_post").click(function(){
-	$.post("cars.php",
-	{
-		wins: totalWinings
-	},
-	function(data, status) {
-		console.log(status);
 
-
-	});		
-});
