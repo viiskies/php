@@ -3,10 +3,19 @@
   display: inline-block;
   height: 200px;
   width: 200px;
+  margin: 20px 20px;
 }
-
+body {
+	background: url(https://www.walldevil.com/wallpapers/a52/wallpaper-textur-background-patterns-backgrounds-wallpapers.jpg);
+}
+#winings, h1 {
+	display: inline-block;
+}
 .dice1 {
 	background-position: -11px -11px;
+/*	  height: 20%;
+  width: 20%;*/
+
 }
 
 .dice2 {

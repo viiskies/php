@@ -2,45 +2,64 @@ let total_rolls = 4;
 let roll = 0;
 let allRolls = [];
 let totalWinings = 0;
-// Get the button, and when the user clicks on it, execute myFunction
-$('.dice').removeClass();
+let total_dices = 3;
+let dices = ['dice1', 'dice2', 'dice3', 'dice4', 'dice5', 'dice6'];
 
-$("#winings").text(totalWinings);
+// $('.dice').removeClass();
+$('#roll_dice').hide();
+$('#dice1').addClass('dice1');
+$('#dice2').addClass('dice2');
+$('#dice3').addClass('dice3');
+// $("#winings").text(totalWinings);
 
 document.getElementById("new_game").onclick = function() { startGame()};
-document.getElementById("roll_dice").onclick = function() { rolla()};
+$("#roll_dice").click(function() { rolla(showWinings)});
 
-/* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
-function rollDices() {
-	let total_dices = 3;
-
+function rollOne() {
 	let current_roll = [];
-	for (var i = total_dices - 1; i >= 0; i--) {
+	for (let i = total_dices - 1; i >= 0; i--) {
 		current_roll.push(Math.ceil(Math.random()*6));
 	}
 
+	// $('.dice').removeClass();
+	for (let l = 1; l <= current_roll.length ; l++) {
+		// $('#dice'+ i).addClass('dice dice' + current_roll[i-1] + " animated rotateIn");
+
+		let timesRun = 0;
+		let interval = setInterval(function change() {
+			timesRun += 1;
+			$('#dice'+ l).removeClass();
+			let random = Math.floor(Math.random()*6);
+			$('#dice'+ l).addClass('dice ' + dices[random]); 
+
+			if(timesRun === 8){
+				clearInterval(interval);
+				$('#dice'+ l).removeClass();
+				$('#dice'+ l).addClass('dice dice' + current_roll[l-1]);
+			}
+		}, 500); 
+	}
+
 	win:
-	for (var j = 0; j < current_roll.length-1; j++) {
-		for (var k = j+1; k < current_roll.length; k++) {
+	for (let j = 0; j < current_roll.length-1; j++) {
+		for (let k = j+1; k < current_roll.length; k++) {
 			if (current_roll[j] == current_roll[k]){
 				totalWinings += 0.1 * current_roll[j];
-				$("#winings").text(Math.round(totalWinings * 10) / 10);
+				// $("#winings").text(Math.round(totalWinings * 10) / 10);
 				break win;
 			}
 		}
 	}
-	// $("#dicegame ul").html('');
-	$('.dice').removeClass();
-	for (var i = 1; i <= current_roll.length ; i++) {
-		$('#dice'+ i).addClass('dice dice' + current_roll[i-1]);
-
-	}
 	return current_roll;
 }
 
+function showWinings() {
+	$("#winings").text(Math.round(totalWinings * 10) / 10);
+}
 
 function startGame() {
-	$('.dice').removeClass();
+	// $('.dice').removeClass();
+	$('#roll_dice').show();
 	totalWinings = 0;
 	$("#winings").text(Math.round(totalWinings * 10) / 10);
 	allRolls = [];
@@ -49,19 +68,19 @@ function startGame() {
 	console.log(allRolls);
 }
 
-function rolla() {
+function rolla(callback) {
 	roll++;
 	if (roll < total_rolls) {
 
 		console.log("Roll number " + roll);
-		let newRoll = rollDices();
+		let newRoll = rollOne();
 		allRolls.push(newRoll);
 		console.log(allRolls);
 
 	} else if (roll == total_rolls) {
 
 		console.log("Roll number " + roll);
-		let newRoll = rollDices();
+		let newRoll = rollOne();
 		allRolls.push(newRoll);
 		console.log(allRolls);
 		console.log("You've won " + Math.round(totalWinings * 10) / 10);
@@ -79,12 +98,12 @@ function rolla() {
 
 		});		
 		console.log("Game is over");
+		$('#roll_dice').hide();
 
 	} else {
 		console.log("Game is really over");
-
 	}
-
+	callback();
 }
 
 
