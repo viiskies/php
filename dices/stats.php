@@ -1,3 +1,7 @@
+<?php 
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +17,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="main.css"> -->
 </head>
 <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,22 +28,23 @@
             </a>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php">Home</a>
+                    <a class="nav-link" href="#">Home</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="stats.php">Stats</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <p class="text-success nav-link mb-0 font-weight-bold">Welcome, <?php echo strtoupper($_SESSION['username']); ?> </p>
+                <a class="btn btn-outline-success my-2 my-sm-0" href="logout.php">Logout</a>
             </form>
         </div>
     </nav>
-    <div class="container">
-        <div class="row">
-        <canvas id="myChart"></canvas>
-
+    <div class="container my-3">
+        <div class="row ">
+        <div class="col">
+            <canvas class="my-5" id="myChart"></canvas>
+            </div>
         </div>
     </div>
     <!-- jQuery first, then Tether, then Bootstrap JS. -->

@@ -3,10 +3,8 @@ session_start();
 if (isset($_SESSION['username'])) {
 } else {
 // user is a guest
-header('Location: login.php');
+	header('Location: login.php');
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +21,7 @@ header('Location: login.php');
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="animate.css">
+
 	<link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
@@ -38,38 +36,47 @@ header('Location: login.php');
 			</a>
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item active">
-					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="#">Home</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="stats.php">Stats</a>
 				</li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
-
+				<p class="text-success nav-link mb-0 font-weight-bold">Welcome, <?php echo strtoupper($_SESSION['username']); ?> </p>
 				<a class="btn btn-outline-success my-2 my-sm-0" href="logout.php">Logout</a>
 			</form>
 		</div>
 	</nav>
 	<div class="container">
 		<div class="row">
-			<div class="col d-flex justify-content-between" id="dice_table">
+			<div class="col d-flex justify-content-center">
 				<div id="dice1" class="dice"></div>
+			</div>
+			<div class="col d-flex justify-content-center">
 				<div id="dice2" class="dice"></div>
+			</div>
+			<div class="col d-flex justify-content-center">
 				<div id="dice3" class="dice"></div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col d-flex justify-content-center">
-				<div id="dicegame">
-					<h1>Winings:</h1>
-					<h2 id="winings"></h2>
-				</div>
+		<div class="row d-flex justify-content-center">
+			<div class="col my-5 d-flex justify-content-center">
+				<h2 class="p-3 bg-white">Winings: <span id="winings"></span></h2>
+			</div>
+			<div class="col my-5 d-flex justify-content-center">
+				<h2 class="p-3 bg-white">Roll: <span id="rollNumber"></span></h2>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col d-flex justify-content-center">
 				<input type="button" class="btn btn-info btn-lg mx-3" id="new_game" name="new_game" value="New game">
-				<input type="button" class="btn btn-primary btn-lg" id="roll_dice" name="roll_dice" value="Roll">
+				<input type="button" class="btn btn-primary btn-lg mx-3" id="roll_dice" name="roll_dice" value="Roll">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col my-5 d-flex justify-content-center">
+				<h1 id="gameresult"></h1>
 			</div>
 		</div>
 	</div>

@@ -7,11 +7,12 @@ $username = "root";
 $password = "";
 $database = "dices";
 
+// get user's all games
 if(isset($_GET['username']) && $_GET['username'] != "") {
 
 	try {
 		$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-    // set the PDO error mode to exception
+
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = $conn->prepare("SELECT * FROM games WHERE username = :username");
 
@@ -28,12 +29,12 @@ if(isset($_GET['username']) && $_GET['username'] != "") {
 	}
 } 
 
+// get high scores, 
 elseif(isset($_GET['top']) && $_GET['top'] != "") {
 
 	try {
 		// die();
 		$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-    // set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		$sql = "SELECT * FROM games ORDER BY winings DESC LIMIT " . $_GET['top'] ."";
@@ -49,10 +50,10 @@ elseif(isset($_GET['top']) && $_GET['top'] != "") {
 	}
 } 
 
+// upload a played game to database
 elseif(isset($_POST['winings']) && $_POST['winings'] != "") {
 	try {
 		$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-    // set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		$sql = $conn->prepare("INSERT INTO games (username, roll1, roll2, roll3, roll4, winings, date) VALUES (:username, :roll1, :roll2, :roll3, :roll4, :winings, NOW())");
@@ -74,19 +75,18 @@ elseif(isset($_POST['winings']) && $_POST['winings'] != "") {
 
 		$sql->execute();
 		$conn = null;
-		$response['message'] = ['type' => 'success','body' => 'User was added'];
+		$response['message'] = ['type' => 'success','body' => 'Game was added'];
 
 	} catch(PDOException $e) {
 		$response['message'] = ['type' => 'danger','body' => $e->getMessage()];
 	}
 } 
 
-
+// get all games player ever
 else  {
 	// die();
 	try {
 		$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-    // set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = "SELECT * FROM games";
 
